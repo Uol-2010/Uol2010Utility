@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xmlmarctomag="http://www.bncf.firenze.sbn.it/unimarc/slim">
+  <xs:element name="xmlmarctomag">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="gen"/>
+        <xs:element ref="collection"/>
+      </xs:sequence>
+      <xs:attribute name="version" use="required" type="xs:NMTOKEN"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="gen">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="stprog" type="xs:string"/>
+        <xs:element name="collection" type="xs:string"/>
+        <xs:element name="agency" type="xs:string"/>
+        <xs:element name="access_rights" type="xs:integer"/>
+        <xs:element name="completeness" type="xs:integer"/>
+        <xs:element name="data" type="xs:dateTime"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="rec">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="lab"/>
+        <xs:element maxOccurs="unbounded" ref="cf"/>
+        <xs:element maxOccurs="unbounded" ref="df"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="lab">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute ref="id"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="cf">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute ref="id"/>
+          <xs:attribute ref="t" use="required"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="df">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element maxOccurs="unbounded" ref="sf"/>
+        <xs:element maxOccurs="unbounded" ref="s1"/>
+      </xs:choice>
+      <xs:attribute ref="id"/>
+      <xs:attribute use="required" ref="t"/>
+      <xs:attribute name="i1" use="required" type="xs:string"/>
+      <xs:attribute name="i2" use="required" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="sf">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute ref="id"/>
+          <xs:attribute name="c" type="xs:string"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="s1">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" minOccurs="0" ref="cf"/>
+        <xs:element maxOccurs="unbounded" minOccurs="0" ref="df"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:attribute name="id" type="xs:ID"/>
+  <xs:attribute name="t" type="xs:string"/>
+  <xs:element name="collection">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="rec" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

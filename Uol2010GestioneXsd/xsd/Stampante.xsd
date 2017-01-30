@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="stampante">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="anagraficaUtente"/>
+        <xs:element ref="datiBiblioteca" minOccurs="0"/>
+        <xs:element ref="richiesta" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="barcode" type="xs:anyURI">
+    <xs:annotation>
+      <xs:documentation>Indica l'URL utilizzato per la stampa dell'immagine del Barcode</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="colore" type="xs:anyURI">
+    <xs:annotation>
+      <xs:documentation>Indica l'URL relatvo alla posizione dell'immagine che indica il colore</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="anagraficaUtente">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="idUtente" type="xs:string"/>
+        <xs:element name="cognome" type="xs:string"/>
+        <xs:element minOccurs="1" name="nome" type="xs:string"/>
+        <xs:element ref="colore" minOccurs="0"/>
+        <xs:element name="rigaVerticale" type="xs:anyURI" minOccurs="0"/>
+        <xs:element name="rigaOrizzontale" type="xs:anyURI" minOccurs="0"/>
+        <xs:element name="autorizzazione" minOccurs="0">
+          <xs:complexType>
+            <xs:attribute name="dataInizio" type="xs:date">
+              <xs:annotation>
+                <xs:documentation>Indica la data di inizio Autorizzazione della Tessera dell'utente</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="dataFine" type="xs:date">
+              <xs:annotation>
+                <xs:documentation>Indica la data di fine Autorizzazione della Tesera dell'Utente</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="codiceTipo" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>Codice Tipo Autorizzazione</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+          </xs:complexType>
+        </xs:element>
+        <xs:element ref="barcode" minOccurs="0"/>
+        <xs:element name="professione" type="xs:string" minOccurs="0"/>
+        <xs:element name="residenza" minOccurs="0">
+          <xs:complexType>
+            <xs:attribute name="indirizzo" type="xs:string"/>
+            <xs:attribute name="citta" type="xs:string"/>
+            <xs:attribute name="paese" type="xs:string"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="domicilio" minOccurs="0">
+          <xs:complexType>
+            <xs:attribute name="indirizzo" type="xs:string"/>
+            <xs:attribute name="citta" type="xs:string"/>
+            <xs:attribute name="telefono" type="xs:string"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="nascita" minOccurs="0">
+          <xs:complexType>
+            <xs:attribute name="luogo" type="xs:string"/>
+            <xs:attribute name="data" type="xs:date"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="documento" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>Viene utilizzato per indicare il tipo di documento dell'utente</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:attribute name="tipo" type="xs:string"/>
+            <xs:attribute name="numeroDocumento" type="xs:string"/>
+            <xs:attribute name="autoritaRilascio" type="xs:string"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="dataGiorno" type="xs:date" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation xml:lang="it">Indica la Data del giorno in cui viene effetuata la stampa</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" name="email" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="datiBiblioteca">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="nomeBiblioteca" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="richiesta">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="barcode"/>
+        <xs:element ref="colore"/>
+        <xs:element ref="datiBibliografici"/>
+        <xs:element name="numFascicoli" type="xs:string"/>
+        <xs:element name="numVolumi" type="xs:string"/>
+        <xs:element name="dataRichiesta" type="xs:dateTime"/>
+        <xs:element name="dataInizioPrevista" type="xs:dateTime"/>
+        <xs:element name="noteUtente" type="xs:string"/>
+        <xs:element name="tipoRichiesta" type="xs:string"/>
+        <xs:element name="noteBiblioteca" type="xs:string" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="datiBibliografici">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="idRichiesta" type="xs:int"/>
+        <xs:element name="autore" type="xs:string" minOccurs="0"/>
+        <xs:element name="titolo" type="xs:string"/>
+        <xs:element name="pubblica" type="xs:string"/>
+        <xs:element name="annoPeriodico" type="xs:string"/>
+        <xs:element ref="localizzazione"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="localizzazione">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="segnatura" type="xs:string"/>
+        <xs:element name="consistenza" type="xs:string"/>
+        <xs:element name="inventario" type="xs:string"/>
+        <xs:element name="precisazione" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

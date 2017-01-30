@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <xsd:element name="richieste">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="utente">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="login" type="xsd:string"/>
+              <xsd:element name="cognomeNome" type="xsd:string"/>
+              <xsd:element name="autorizzazione">
+                <xsd:complexType>
+                  <xsd:simpleContent>
+                    <xsd:extension base="xsd:string">
+                      <xsd:attribute name="ID" type="xsd:string"/>
+                    </xsd:extension>
+                  </xsd:simpleContent>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element minOccurs="0" name="email" type="xsd:string"/>
+              <xsd:element minOccurs="0" name="situazioneRichieste">
+                <xsd:complexType>
+                  <xsd:attribute name="numRichieste" type="xsd:integer" use="required"/>
+                  <xsd:attribute name="numDepositi" type="xsd:integer"/>
+                  <xsd:attribute name="numScadute" type="xsd:integer"/>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element minOccurs="0" ref="datiBibliografici"/>
+        <xsd:element minOccurs="0" name="situazioneRichiesta">
+          <xsd:annotation>
+            <xsd:documentation>Sezione utilizzata per gestire le informazioni relative alla Richiesta </xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="servizio">
+                <xsd:annotation>
+                  <xsd:documentation>Descrizione del Servizio selezionato</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:simpleContent>
+                    <xsd:extension base="xsd:string">
+                      <xsd:attribute name="ID" type="xsd:string"/>
+                      <xsd:attribute name="emailChiamate" type="xsd:string"/>
+                    </xsd:extension>
+                  </xsd:simpleContent>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element maxOccurs="unbounded" minOccurs="0" name="risultatoControlli">
+                <xsd:annotation>
+                  <xsd:documentation>Questo nodo viene utilizzato per gestire la lista degli errori risultanti dal controlli fati.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:simpleContent>
+                    <xsd:extension base="xsd:string">
+                      <xsd:attribute name="ID" type="xsd:int">
+                        <xsd:annotation>
+                          <xsd:documentation>Codice identificativo del controllo</xsd:documentation>
+                        </xsd:annotation>
+                      </xsd:attribute>
+                      <xsd:attribute name="bloccante" type="xsd:boolean">
+                        <xsd:annotation>
+                          <xsd:documentation>Questo attributo viene utilizzato per indicare se il controllo risulta essere bloccante</xsd:documentation>
+                        </xsd:annotation>
+                      </xsd:attribute>
+                    </xsd:extension>
+                  </xsd:simpleContent>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:sequence minOccurs="0">
+                <xsd:element ref="dataRichiesta"/>
+                <xsd:element name="presubilmenteDisponibile" type="xsd:dateTime"/>
+                <xsd:element name="dataRiconsegna" type="xsd:dateTime"/>
+              </xsd:sequence>
+              <xsd:sequence minOccurs="0">
+                <xsd:element minOccurs="0" name="anno" type="xsd:int"/>
+                <xsd:element minOccurs="0" name="meseGiorno" type="xsd:string"/>
+                <xsd:element name="volume" type="xsd:string"/>
+              </xsd:sequence>
+              <xsd:element name="note" type="xsd:string"/>
+            </xsd:sequence>
+            <xsd:attribute name="risultatiBloccati" type="xsd:boolean"/>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="datiBibliografici">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="bid" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="0" ref="autore"/>
+        <xsd:element ref="titolo"/>
+        <xsd:element minOccurs="1" name="pubblicazione" type="xsd:string"/>
+        <xsd:element name="natura" type="xsd:string"/>
+        <xsd:element minOccurs="0" name="annoPub" type="xsd:integer"/>
+        <xsd:element name="segnatura">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="biblioteca">
+                <xsd:complexType>
+                  <xsd:simpleContent>
+                    <xsd:extension base="xsd:string">
+                      <xsd:attribute name="siglaBiblioteca" type="xsd:string" use="required"/>
+                    </xsd:extension>
+                  </xsd:simpleContent>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="segnatura" type="xsd:string"/>
+              <xsd:element name="inventario">
+                <xsd:complexType>
+                  <xsd:simpleContent>
+                    <xsd:extension base="xsd:string">
+                      <xsd:attribute name="precisazione" type="xsd:string" use="optional"/>
+                      <xsd:attribute fixed="" name="secondaPrecisazione" type="xsd:string"/>
+                      <xsd:attribute name="categoria" type="xsd:string"/>
+                    </xsd:extension>
+                  </xsd:simpleContent>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element minOccurs="0" name="disponibilita">
+                <xsd:complexType>
+                  <xsd:simpleContent>
+                    <xsd:extension base="xsd:string">
+                      <xsd:attribute name="codiceDisponibilita" type="xsd:string"/>
+                    </xsd:extension>
+                  </xsd:simpleContent>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element minOccurs="0" name="fruibilita">
+                <xsd:complexType>
+                  <xsd:simpleContent>
+                    <xsd:extension base="xsd:string">
+                      <xsd:attribute name="codiceFruibilita" type="xsd:string"/>
+                    </xsd:extension>
+                  </xsd:simpleContent>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="autore">
+    <xsd:complexType>
+      <xsd:simpleContent>
+        <xsd:extension base="xsd:string">
+          <xsd:attribute name="idAutore" type="xsd:string" use="required"/>
+        </xsd:extension>
+      </xsd:simpleContent>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="titolo" type="xsd:string"/>
+  <xsd:element name="dataRichiesta" type="xsd:dateTime"/>
+</xsd:schema>
