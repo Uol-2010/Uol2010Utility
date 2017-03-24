@@ -85,7 +85,7 @@ public class UtenteXsd extends ReadXsd<Utente>
 		}
 		catch (CryptingException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw e;
 		}
 	}
@@ -120,7 +120,7 @@ public class UtenteXsd extends ReadXsd<Utente>
 		}
 		catch (JAXBException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw e;
 		}
 		
@@ -158,7 +158,7 @@ public class UtenteXsd extends ReadXsd<Utente>
 		}
 		catch (JAXBException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw e;
 		}
 		
@@ -271,17 +271,17 @@ public class UtenteXsd extends ReadXsd<Utente>
 		}
 		catch (PropertyException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw e;
 		}
 		catch (JAXBException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw e;
 		}
 		catch (Exception e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw e;
 		}
 		finally
@@ -323,17 +323,17 @@ public class UtenteXsd extends ReadXsd<Utente>
 		}
 		catch (PropertyException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw e;
 		}
 		catch (JAXBException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw e;
 		}
 		catch (Exception e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw e;
 		}
 	}
@@ -370,17 +370,17 @@ public class UtenteXsd extends ReadXsd<Utente>
 		}
 		catch (PropertyException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw e;
 		}
 		catch (JAXBException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw e;
 		}
 		catch (Exception e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw e;
 		}
 		finally

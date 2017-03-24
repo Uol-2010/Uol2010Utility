@@ -112,32 +112,32 @@ public class Crypting
 		}
 		catch (InvalidKeyException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw new CryptingException(e.getMessage());
 		}
 		catch (NoSuchAlgorithmException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw new CryptingException(e.getMessage());
 		}
 		catch (NoSuchPaddingException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw new CryptingException(e.getMessage());
 		}
 		catch (InvalidAlgorithmParameterException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw new CryptingException(e.getMessage());
 		}
 		catch (IllegalBlockSizeException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw new CryptingException(e.getMessage());
 		}
 		catch (BadPaddingException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw new CryptingException(e.getMessage());
 		}
 
@@ -166,7 +166,7 @@ public class Crypting
 		}
 		catch (NumberFormatException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw new CryptingException(e.getMessage());
 		}
 	}
@@ -184,32 +184,32 @@ public class Crypting
 		}
 		catch (InvalidKeyException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw new CryptingException(e.getMessage());
 		}
 		catch (NoSuchAlgorithmException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw new CryptingException(e.getMessage());
 		}
 		catch (NoSuchPaddingException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw new CryptingException(e.getMessage());
 		}
 		catch (InvalidAlgorithmParameterException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw new CryptingException(e.getMessage());
 		}
 		catch (IllegalBlockSizeException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw new CryptingException(e.getMessage());
 		}
 		catch (BadPaddingException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw new CryptingException(e.getMessage());
 		}
 		return ris;
