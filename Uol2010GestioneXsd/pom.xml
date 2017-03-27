@@ -12,12 +12,12 @@
 		<dependency>
 			<groupId>net.bncf.uol2010.utility.crypting</groupId>
 			<artifactId>Uol2010Crypting</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>mx.randalf.xsd</groupId>
 			<artifactId>RandalfXsd</artifactId>
-			<version>1.0.6</version>
+			<version>1.0.8</version>
 		</dependency>
 	</dependencies>
 	<repositories>
