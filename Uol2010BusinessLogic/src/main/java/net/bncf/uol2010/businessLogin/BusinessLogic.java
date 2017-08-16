@@ -128,6 +128,7 @@ public abstract class BusinessLogic<T extends Serializable, D extends GenericHib
 		D tableDao = null;
 		Long result = new Long("0");
 		Criteria crit = null;
+		Object maxId = null;
 		try {
 
 			tableDao = newInstanceDao();
@@ -135,7 +136,10 @@ public abstract class BusinessLogic<T extends Serializable, D extends GenericHib
 
 			crit = tableDao.createCriteria();
 			crit.setProjection(Projections.max("id"));
-			result = new Long(crit.uniqueResult()+"");
+			maxId = crit.uniqueResult();
+			if (maxId != null){
+				result = new Long(maxId+"");
+			}
 			tableDao.commitTransaction();
 		} catch (HibernateException e) {
 			tableDao.rollbackTransaction();

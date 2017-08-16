@@ -12,12 +12,28 @@
 		<dependency>
 			<groupId>net.bncf.uol2010.utility.xsd</groupId>
 			<artifactId>Uol2010GestioneXsd</artifactId>
-			<version>1.0.1</version>
+			<version>1.0.2</version>
 		</dependency>
 		<dependency>
 			<groupId>mx.randalf.tools</groupId>
 			<artifactId>RandalfTools</artifactId>
 			<version>1.0.8</version>
+		</dependency>
+		<dependency>
+			<groupId>net.bncf.uol2010.database.schema</groupId>
+			<artifactId>Uol2010DatabaseSchema</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>mx.randalf.moduli.servlet.core</groupId>
+			<artifactId>RandalfServletXslCore</artifactId>
+			<version>1.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>3.0-alpha-1</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 	<repositories>
@@ -75,5 +91,5 @@
 			</resource>
 		</resources>
 	</build>
-	<version>1.0.1</version>
+	<version>1.0.3</version>
 </project>
