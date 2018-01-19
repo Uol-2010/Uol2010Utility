@@ -22,7 +22,7 @@
 		<dependency>
 			<groupId>net.bncf.uol2010.database.schema</groupId>
 			<artifactId>Uol2010DatabaseSchema</artifactId>
-			<version>1.0.2</version>
+			<version>1.0.4</version>
 		</dependency>
 		<dependency>
 			<groupId>mx.randalf.moduli.servlet.core</groupId>

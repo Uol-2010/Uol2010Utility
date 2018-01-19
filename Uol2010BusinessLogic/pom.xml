@@ -11,8 +11,8 @@
   	<dependency>
   		<groupId>net.bncf.uol2010.database.schema</groupId>
   		<artifactId>Uol2010DatabaseSchema</artifactId>
-  		<version>1.0.1</version>
+  		<version>1.0.3</version>
   	</dependency>
   </dependencies>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
 </project>

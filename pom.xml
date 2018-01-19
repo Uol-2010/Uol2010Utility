@@ -15,6 +15,10 @@
 		<module>Uol2010GestioneXsd</module>
 		<module>Uol2010Crypting</module>
 		<module>Uol2010BusinessLogic</module>
+		<module>Uol2010Utils</module>
+		<module>Uol2010ServletXsl</module>
+		<module>Uol2010GestioneAccessoWeb</module>
+		<module>Uol2010Converter</module>
 	</modules>
 	<repositories>
 		<repository>
