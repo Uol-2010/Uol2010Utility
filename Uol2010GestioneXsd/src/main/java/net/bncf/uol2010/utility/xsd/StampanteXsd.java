@@ -52,7 +52,7 @@ public class StampanteXsd
 	 */
 	public StampanteXsd()
 	{
-		log.debug("Costrutore");
+		log.debug("\n"+"Costrutore");
 	}
 
 	/**
@@ -68,25 +68,25 @@ public class StampanteXsd
 
 		try
 		{
-			log.debug("read(File "+fileXml+")");
+			log.debug("\n"+"read(File "+fileXml+")");
 			this.fileXml = fileXml.getAbsolutePath();
-			log.debug("fileXml: "+this.fileXml);
-			log.debug("fileXml.exists: "+fileXml.exists());
+			log.debug("\n"+"fileXml: "+this.fileXml);
+			log.debug("\n"+"fileXml.exists: "+fileXml.exists());
 			if (fileXml.exists())
 			{
-				log.debug("Utente.package: "+Stampante.class.getPackage().getName());
+				log.debug("\n"+"Utente.package: "+Stampante.class.getPackage().getName());
 				jc = JAXBContext.newInstance(Stampante.class.getPackage().getName());
 
-				log.debug("jc.createUnmarshaller()");
+				log.debug("\n"+"jc.createUnmarshaller()");
 				u = jc.createUnmarshaller();
 
-				log.debug("u.unmarshal("+fileXml+")");
+				log.debug("\n"+"u.unmarshal("+fileXml+")");
 				stampante = (Stampante) u.unmarshal(fileXml);
 			}
 		}
 		catch (JAXBException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw e;
 		}
 		
@@ -105,22 +105,22 @@ public class StampanteXsd
 
 		try
 		{
-			log.debug("read(InputStream "+fileXml+");");
+			log.debug("\n"+"read(InputStream "+fileXml+");");
 			if (fileXml != null)
 			{
-				log.debug("Utente.package: "+Stampante.class.getPackage().getName());
+				log.debug("\n"+"Utente.package: "+Stampante.class.getPackage().getName());
 				jc = JAXBContext.newInstance(Stampante.class.getPackage().getName());
 
-				log.debug("jc.createUnmarshaller()");
+				log.debug("\n"+"jc.createUnmarshaller()");
 				u = jc.createUnmarshaller();
 
-				log.debug("u.unmarshal("+fileXml+")");
+				log.debug("\n"+"u.unmarshal("+fileXml+")");
 				stampante = (Stampante) u.unmarshal(fileXml);
 			}
 		}
 		catch (JAXBException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw e;
 		}
 		
@@ -137,7 +137,7 @@ public class StampanteXsd
 	 */
 	public void write(String fileXml, boolean fileBackup) throws PropertyException, JAXBException, Exception
 	{
-		log.debug("write("+fileXml+", "+fileBackup+")");
+		log.debug("\n"+"write("+fileXml+", "+fileBackup+")");
 		this.fileBackup=fileBackup;
 		write(fileXml);
 	}
@@ -152,7 +152,7 @@ public class StampanteXsd
 	 */
 	public void write(String fileXml) throws PropertyException, JAXBException, Exception
 	{
-		log.debug("write("+fileXml+")");
+		log.debug("\n"+"write("+fileXml+")");
 		this.fileXml = fileXml;
 		write();
 	}
@@ -174,56 +174,56 @@ public class StampanteXsd
 		
 		try
 		{
-			log.debug("write()");
+			log.debug("\n"+"write()");
 
-			log.debug("Utente.package: "+Stampante.class.getPackage().getName());
+			log.debug("\n"+"Utente.package: "+Stampante.class.getPackage().getName());
 			jc = JAXBContext.newInstance(Stampante.class.getPackage().getName());
 
-			log.debug("jc.createUnmarshaller()");
+			log.debug("\n"+"jc.createUnmarshaller()");
 			m = jc.createMarshaller();
 
-			log.debug("m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);");
+			log.debug("\n"+"m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);");
 			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);
 
-			log.debug("fileXml: "+fileXml);
+			log.debug("\n"+"fileXml: "+fileXml);
 			fOut =  new File(fileXml);
 			if (!fOut.getParentFile().exists())
 				if (!fOut.getParentFile().mkdirs())
 					throw new Exception("Problemi nella creazone della cartella ["+fOut.getParentFile().getAbsolutePath()+"]");
 
-			log.debug("fOut.exists(): "+fOut.exists());
+			log.debug("\n"+"fOut.exists(): "+fOut.exists());
 			if (fOut.exists() && fileBackup)
 			{
 				fOutBck = genFileBck(fOut);
-				log.debug("fOutBck: "+fOutBck);
+				log.debug("\n"+"fOutBck: "+fOutBck);
 				if (!fOutBck.getParentFile().exists())
 					if (!fOutBck.getParentFile().mkdirs())
 						throw new Exception("Problemi nella creazone della cartella ["+fOutBck.getParentFile().getAbsolutePath()+"]");
 
-				log.debug("!fOut.renameTo(fOutBck)");
+				log.debug("\n"+"!fOut.renameTo(fOutBck)");
 				if (!fOut.renameTo(fOutBck))
 					throw new Exception("Problemi nello spostamento del file "+fOut.getAbsolutePath()+" -> "+fOutBck.getAbsolutePath());
 			}
 
-			log.debug("FileOutputStream(fOut)");
+			log.debug("\n"+"FileOutputStream(fOut)");
 			fos = new FileOutputStream(fOut);
 
-			log.debug("m.marshal( utente, fos )");
+			log.debug("\n"+"m.marshal( utente, fos )");
 			m.marshal( stampante, fos );
 		}
 		catch (PropertyException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw e;
 		}
 		catch (JAXBException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw e;
 		}
 		catch (Exception e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw e;
 		}
 		finally
@@ -250,32 +250,32 @@ public class StampanteXsd
 		
 		try
 		{
-			log.debug("write(OutputStream output)");
-			log.debug("Utente.package: "+Stampante.class.getPackage().getName());
+			log.debug("\n"+"write(OutputStream output)");
+			log.debug("\n"+"Utente.package: "+Stampante.class.getPackage().getName());
 			jc = JAXBContext.newInstance(Stampante.class.getPackage().getName());
 
-			log.debug("jc.createMarshaller();");
+			log.debug("\n"+"jc.createMarshaller();");
 			m = jc.createMarshaller();
 
-			log.debug("m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);");
+			log.debug("\n"+"m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);");
 			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);
 
-			log.debug("m.marshal( utente, output );");
+			log.debug("\n"+"m.marshal( utente, output );");
 			m.marshal( stampante, output );
 		}
 		catch (PropertyException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw e;
 		}
 		catch (JAXBException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw e;
 		}
 		catch (Exception e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw e;
 		}
 	}
@@ -295,34 +295,34 @@ public class StampanteXsd
 		
 		try
 		{
-			log.debug("writeToString()");
+			log.debug("\n"+"writeToString()");
 
-			log.debug("Utente.package: "+Stampante.class.getPackage().getName());
+			log.debug("\n"+"Utente.package: "+Stampante.class.getPackage().getName());
 			jc = JAXBContext.newInstance(Stampante.class.getPackage().getName());
 
-			log.debug("jc.createMarshaller();");
+			log.debug("\n"+"jc.createMarshaller();");
 			m = jc.createMarshaller();
 
-			log.debug("m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);");
+			log.debug("\n"+"m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);");
 			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);
 
 			baos =  new ByteArrayOutputStream();
-			log.debug("m.marshal( utente, baos );");
+			log.debug("\n"+"m.marshal( utente, baos );");
 			m.marshal( stampante, baos );
 		}
 		catch (PropertyException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw e;
 		}
 		catch (JAXBException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw e;
 		}
 		catch (Exception e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw e;
 		}
 		finally
@@ -378,7 +378,7 @@ public class StampanteXsd
 	 */
 	public Stampante getStampante()
 	{
-		log.debug("getStampante()");
+		log.debug("\n"+"getStampante()");
 		if (stampante == null)
 			stampante = new Stampante();
 		return stampante;
@@ -391,7 +391,7 @@ public class StampanteXsd
 	 */
 	public void setUtente(Stampante stampante)
 	{
-		log.debug("setUtente()");
+		log.debug("\n"+"setUtente()");
 		this.stampante = stampante;
 	}
 

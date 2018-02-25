@@ -75,7 +75,7 @@ public class Crypting
 			key += df2.format(gc.get(Calendar.HOUR_OF_DAY));
 			key += df2.format(gc.get(Calendar.MINUTE));
 			key += df2.format(gc.get(Calendar.SECOND));
-			log.debug("Key: "+key);
+			log.debug("\n"+"Key: "+key);
 			encrypt = encryptData(key);
 //			encrypt = encryptData("004VELA20091013170634");
 		}
@@ -99,12 +99,12 @@ public class Crypting
 		
 		try
 		{
-			log.debug("testo: "+testo+" - "+testo.length()+" - "+(testo.length()%16));
+			log.debug("\n"+"testo: "+testo+" - "+testo.length()+" - "+(testo.length()%16));
 			
 
 			while ((testo.length()%16)!=0)
 				testo += " ";
-			log.debug("testo: "+testo+" - "+testo.length());
+			log.debug("\n"+"testo: "+testo+" - "+testo.length());
 			Cipher cipher = genCipher(Cipher.ENCRYPT_MODE);
 			byte[] encrypted = cipher.doFinal(testo.getBytes());
 
@@ -152,7 +152,7 @@ public class Crypting
 		{
 			decrypt = decryptData(data);
 
-			log.debug("decrypt: "+decrypt);
+			log.debug("\n"+"decrypt: "+decrypt);
 			this.decrypt = new String[3];
 			this.decrypt[0] = decrypt.substring(0, 3);
 			decrypt = decrypt.substring(3);
@@ -176,11 +176,11 @@ public class Crypting
 		String ris = null;
 		try
 		{
-			log.debug("testoXX: "+testo);
+			log.debug("\n"+"testoXX: "+testo);
 			Cipher cipher = genCipher(Cipher.DECRYPT_MODE);
 			byte[] outText = cipher.doFinal(hexToBytes(testo));
 			ris = new String(outText).trim();
-			log.debug("risXX: "+ris);
+			log.debug("\n"+"risXX: "+ris);
 		}
 		catch (InvalidKeyException e)
 		{
@@ -303,10 +303,10 @@ public class Crypting
 					Integer.valueOf(decrypt[2].substring(12,14)));
 			gcCheck.setTimeZone(SimpleTimeZone.getTimeZone("GMT"));
 			gcNow = new GregorianCalendar(SimpleTimeZone.getTimeZone("GMT"));
-			log.debug("gcCheck: "+gcCheck.toString()+" - "+gcCheck.getTimeInMillis());
-			log.debug("gcNow: "+gcNow.toString()+" - "+gcNow.getTimeInMillis());
-			log.debug("Diff.: "+(gcCheck.getTimeInMillis()-gcNow.getTimeInMillis()));
-			log.debug("Test.: "+(gcCheck.getTimeInMillis()>=gcNow.getTimeInMillis()));
+			log.debug("\n"+"gcCheck: "+gcCheck.toString()+" - "+gcCheck.getTimeInMillis());
+			log.debug("\n"+"gcNow: "+gcNow.toString()+" - "+gcNow.getTimeInMillis());
+			log.debug("\n"+"Diff.: "+(gcCheck.getTimeInMillis()-gcNow.getTimeInMillis()));
+			log.debug("\n"+"Test.: "+(gcCheck.getTimeInMillis()>=gcNow.getTimeInMillis()));
 			if (gcCheck.getTimeInMillis()>=gcNow.getTimeInMillis())
 				ris=true;
 		}

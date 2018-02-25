@@ -40,7 +40,7 @@ public class BancoXsd
 	 */
 	public BancoXsd()
 	{
-		log.debug("Cotruttore");
+		log.debug("\n"+"Cotruttore");
 	}
 
 	public void readXml(String xml) throws JAXBException
@@ -54,7 +54,7 @@ public class BancoXsd
 		}
 		catch (JAXBException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw e;
 		}
 		finally
@@ -66,7 +66,7 @@ public class BancoXsd
 			}
 			catch (IOException e)
 			{
-				log.error(e);
+				log.error(e.getMessage(), e);
 				throw new JAXBException(e.getMessage());
 			}
 		}
@@ -79,22 +79,22 @@ public class BancoXsd
 
 		try
 		{
-			log.debug("read(InputStream "+input+")");
+			log.debug("\n"+"read(InputStream "+input+")");
 			if (input != null)
 			{
-				log.debug("Richieste.package: "+Banco.class.getPackage().getName());
+				log.debug("\n"+"Richieste.package: "+Banco.class.getPackage().getName());
 				jc = JAXBContext.newInstance(Banco.class.getPackage().getName());
 
-				log.debug("jc.createUnmarshaller");
+				log.debug("\n"+"jc.createUnmarshaller");
 				u = jc.createUnmarshaller();
 
-				log.debug("u.unmarchal("+input+")");
+				log.debug("\n"+"u.unmarchal("+input+")");
 				banco = (Banco)u.unmarshal(input);
 			}
 		}
 		catch (JAXBException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(), e);
 			throw e;
 		}
 	}
@@ -114,34 +114,34 @@ public class BancoXsd
 		
 		try
 		{
-			log.debug("writeToString()");
+			log.debug("\n"+"writeToString()");
 
-			log.debug("Utente.package: "+Banco.class.getPackage().getName());
+			log.debug("\n"+"Utente.package: "+Banco.class.getPackage().getName());
 			jc = JAXBContext.newInstance(Banco.class.getPackage().getName());
 
-			log.debug("jc.createMarshaller();");
+			log.debug("\n"+"jc.createMarshaller();");
 			m = jc.createMarshaller();
 
-			log.debug("m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);");
+			log.debug("\n"+"m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);");
 			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);
 
 			baos =  new ByteArrayOutputStream();
-			log.debug("m.marshal( utente, baos );");
+			log.debug("\n"+"m.marshal( utente, baos );");
 			m.marshal( banco, baos );
 		}
 		catch (PropertyException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw e;
 		}
 		catch (JAXBException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw e;
 		}
 		catch (Exception e)
 		{
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw e;
 		}
 		finally

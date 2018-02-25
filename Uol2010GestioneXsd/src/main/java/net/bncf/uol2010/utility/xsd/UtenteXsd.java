@@ -53,7 +53,7 @@ public class UtenteXsd extends ReadXsd<Utente>
 	 */
 	public UtenteXsd()
 	{
-		log.debug("Costrutore");
+		log.debug("\n"+"Costrutore");
 	}
 
 	/**
@@ -67,21 +67,21 @@ public class UtenteXsd extends ReadXsd<Utente>
 		
 		try
 		{
-			log.debug("UtenteXsd("+login+", "+password+", "+ipClient+", "+archive+", "+ipStazione+") throws CryptingException");
+			log.debug("\n"+"UtenteXsd("+login+", "+password+", "+ipClient+", "+archive+", "+ipStazione+") throws CryptingException");
 			of = new ObjectFactory();
 			utente = of.createUtente();
 			utente.setLogin(of.createLogin());
-			log.debug("utente.getLogin().setLogin("+login+");");
+			log.debug("\n"+"utente.getLogin().setLogin("+login+");");
 			utente.getLogin().setLogin(login);
 
 			crypting =  new Crypting();
-			log.debug("utente.getLogin().setPassword("+crypting.encrypt(password)+")");
+			log.debug("\n"+"utente.getLogin().setPassword("+crypting.encrypt(password)+")");
 			utente.getLogin().setPassword(crypting.encrypt(password));
 
 			utente.getLogin().setArchive(archive);
 			if (ipStazione != null)
 				utente.getLogin().setIpClient(ipStazione);
-			log.debug("UtenteXsd Stop");
+			log.debug("\n"+"UtenteXsd Stop");
 		}
 		catch (CryptingException e)
 		{
@@ -210,7 +210,7 @@ public class UtenteXsd extends ReadXsd<Utente>
 	 */
 	public void write(String fileXml) throws PropertyException, JAXBException, Exception
 	{
-		log.debug("write("+fileXml+")");
+		log.debug("\n"+"write("+fileXml+")");
 		this.fileXml = fileXml;
 		write();
 	}
@@ -232,41 +232,41 @@ public class UtenteXsd extends ReadXsd<Utente>
 		
 		try
 		{
-			log.debug("write()");
+			log.debug("\n"+"write()");
 
-			log.debug("Utente.package: "+Utente.class.getPackage().getName());
+			log.debug("\n"+"Utente.package: "+Utente.class.getPackage().getName());
 			jc = JAXBContext.newInstance(Utente.class.getPackage().getName());
 
-			log.debug("jc.createUnmarshaller()");
+			log.debug("\n"+"jc.createUnmarshaller()");
 			m = jc.createMarshaller();
 
-			log.debug("m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);");
+			log.debug("\n"+"m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);");
 			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);
 
-			log.debug("fileXml: "+fileXml);
+			log.debug("\n"+"fileXml: "+fileXml);
 			fOut =  new File(fileXml);
 			if (!fOut.getParentFile().exists())
 				if (!fOut.getParentFile().mkdirs())
 					throw new Exception("Problemi nella creazone della cartella ["+fOut.getParentFile().getAbsolutePath()+"]");
 
-			log.debug("fOut.exists(): "+fOut.exists());
+			log.debug("\n"+"fOut.exists(): "+fOut.exists());
 			if (fOut.exists())
 			{
 				fOutBck = genFileBck(fOut);
-				log.debug("fOutBck: "+fOutBck);
+				log.debug("\n"+"fOutBck: "+fOutBck);
 				if (!fOutBck.getParentFile().exists())
 					if (!fOutBck.getParentFile().mkdirs())
 						throw new Exception("Problemi nella creazone della cartella ["+fOutBck.getParentFile().getAbsolutePath()+"]");
 
-				log.debug("!fOut.renameTo(fOutBck)");
+				log.debug("\n"+"!fOut.renameTo(fOutBck)");
 				if (!fOut.renameTo(fOutBck))
 					throw new Exception("Problemi nello spostamento del file "+fOut.getAbsolutePath()+" -> "+fOutBck.getAbsolutePath());
 			}
 
-			log.debug("FileOutputStream(fOut)");
+			log.debug("\n"+"FileOutputStream(fOut)");
 			fos = new FileOutputStream(fOut);
 
-			log.debug("m.marshal( utente, fos )");
+			log.debug("\n"+"m.marshal( utente, fos )");
 			m.marshal( utente, fos );
 		}
 		catch (PropertyException e)
@@ -308,17 +308,17 @@ public class UtenteXsd extends ReadXsd<Utente>
 		
 		try
 		{
-			log.debug("write(OutputStream output)");
-			log.debug("Utente.package: "+Utente.class.getPackage().getName());
+			log.debug("\n"+"write(OutputStream output)");
+			log.debug("\n"+"Utente.package: "+Utente.class.getPackage().getName());
 			jc = JAXBContext.newInstance(Utente.class.getPackage().getName());
 
-			log.debug("jc.createMarshaller();");
+			log.debug("\n"+"jc.createMarshaller();");
 			m = jc.createMarshaller();
 
-			log.debug("m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);");
+			log.debug("\n"+"m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);");
 			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);
 
-			log.debug("m.marshal( utente, output );");
+			log.debug("\n"+"m.marshal( utente, output );");
 			m.marshal( utente, output );
 		}
 		catch (PropertyException e)
@@ -353,19 +353,19 @@ public class UtenteXsd extends ReadXsd<Utente>
 		
 		try
 		{
-			log.debug("writeToString()");
+			log.debug("\n"+"writeToString()");
 
-			log.debug("Utente.package: "+Utente.class.getPackage().getName());
+			log.debug("\n"+"Utente.package: "+Utente.class.getPackage().getName());
 			jc = JAXBContext.newInstance(Utente.class.getPackage().getName());
 
-			log.debug("jc.createMarshaller();");
+			log.debug("\n"+"jc.createMarshaller();");
 			m = jc.createMarshaller();
 
-			log.debug("m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);");
+			log.debug("\n"+"m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);");
 			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);
 
 			baos =  new ByteArrayOutputStream();
-			log.debug("m.marshal( utente, baos );");
+			log.debug("\n"+"m.marshal( utente, baos );");
 			m.marshal( utente, baos );
 		}
 		catch (PropertyException e)
@@ -436,7 +436,7 @@ public class UtenteXsd extends ReadXsd<Utente>
 	 */
 	public Utente getUtente()
 	{
-		log.debug("getUtente()");
+		log.debug("\n"+"getUtente()");
 		if (utente == null)
 			utente = new Utente();
 		return utente;
@@ -448,7 +448,7 @@ public class UtenteXsd extends ReadXsd<Utente>
 	 */
 	public Login getLogin()
 	{
-		log.debug("getLogin()");
+		log.debug("\n"+"getLogin()");
 		if (this.getUtente()== null)
 			return null;
 		else if (this.getUtente().getLogin() == null)
@@ -459,7 +459,7 @@ public class UtenteXsd extends ReadXsd<Utente>
 
 	public List<Utente.MsgError> getMsgError()
 	{
-		log.debug("getMsgError()");
+		log.debug("\n"+"getMsgError()");
 		if (this.getUtente()==null)
 			return null;
 		else if (this.getUtente().getMsgError() == null)
@@ -475,7 +475,7 @@ public class UtenteXsd extends ReadXsd<Utente>
 	 */
 	public void addMsgError(String msgError)
 	{
-		log.debug("addMsgError("+msgError+")");
+		log.debug("\n"+"addMsgError("+msgError+")");
 		Utente.MsgError msgErr = null;
 
 		if (this.getUtente()!= null)

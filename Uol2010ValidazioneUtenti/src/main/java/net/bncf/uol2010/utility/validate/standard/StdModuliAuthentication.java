@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -109,7 +110,7 @@ public abstract class StdModuliAuthentication extends StdModuliCore {
 	private boolean isAutenticathed(HttpServletRequest request, HttpServletResponse response) {
 		boolean ris = false;
 
-		log.debug("iAuthenticathed()");
+		log.debug("\n"+"iAuthenticathed()");
 		if (request.getParameter("azione") != null && request.getParameter("azione").equals("logout")) {
 			logOut(response);
 			authentication = null;
@@ -121,7 +122,7 @@ public abstract class StdModuliAuthentication extends StdModuliCore {
 				}
 			}
 		}
-		log.debug("Risultato: " + ris);
+		log.debug("\n"+"Risultato: " + ris);
 		return ris;
 	}
 
@@ -144,11 +145,11 @@ public abstract class StdModuliAuthentication extends StdModuliCore {
 		this.response = response;
 
 		try {
-			log.debug("eseguiAuthentication");
+			log.debug("\n"+"eseguiAuthentication");
 			initAuthentication();
 
 			azione = request.getParameter("_azione_");
-			log.debug("_azione_: " + azione);
+			log.debug("\n"+"_azione_: " + azione);
 
 			if (azione == null)
 				azione = "show";
@@ -189,7 +190,7 @@ public abstract class StdModuliAuthentication extends StdModuliCore {
 				datiXml.addElement(element);
 			}
 		} catch (SOAPException e) {
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw new ServletException(e.getMessage());
 		} catch (ServletException e) {
 			throw e;
@@ -238,16 +239,16 @@ public abstract class StdModuliAuthentication extends StdModuliCore {
 		} catch (ServletException e) {
 			throw e;
 		} catch (IOException e) {
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw new ServletException(e.getMessage());
 		} catch (SOAPException e) {
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw new ServletException(e.getMessage());
 		} catch (HibernateException e) {
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw new ServletException(e.getMessage());
 		} catch (HibernateUtilException e) {
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw new ServletException(e.getMessage());
 		}
 	}
@@ -264,26 +265,28 @@ public abstract class StdModuliAuthentication extends StdModuliCore {
 			String ipStazione) throws ServletException {
 		ArrayList<MessageElement> nodes = null;
 		UtenteBibDAO utenteBibDAO = null;
-		UtenteBib utenteBib = null;
+		List<UtenteBib> utenteBibs = null;
 		String md5Db = null;
 		String md5Old = null;
 
 		try {
 			utenteBibDAO = new UtenteBibDAO();
-			utenteBib = utenteBibDAO.findByLogin(request.getParameter("_loginAuthentication_"));
-			if (utenteBib != null) {
-				md5Db = calcPwd(utenteBib.getPassword());
-				md5Old = calcPwd(request.getParameter("_oldPassword_"));
-
-				if (md5Db.equals(md5Old)) {
-					utenteBib.setPassword(calcPwd(request.getParameter("_passwordAuthentication_")));
-					utenteBibDAO.update(utenteBib);
-					check(request, response, pathXsl, ipStazione);
-				} else {
-					nodes = new ArrayList<MessageElement>();
-					datiXml.getConvert().addChildElement(element, nodes, "MessageError",
-							"La Vecchia password non \u00E8 valida", true);
-					datiXml.addElement(element);
+			utenteBibs = utenteBibDAO.findByLogin(request.getParameter("_loginAuthentication_"));
+			if (utenteBibs != null) {
+				for (UtenteBib utenteBib: utenteBibs) {
+					md5Db = calcPwd(utenteBib.getPassword());
+					md5Old = calcPwd(request.getParameter("_oldPassword_"));
+	
+					if (md5Db.equals(md5Old)) {
+						utenteBib.setPassword(calcPwd(request.getParameter("_passwordAuthentication_")));
+						utenteBibDAO.update(utenteBib);
+						check(request, response, pathXsl, ipStazione);
+					} else {
+						nodes = new ArrayList<MessageElement>();
+						datiXml.getConvert().addChildElement(element, nodes, "MessageError",
+								"La Vecchia password non \u00E8 valida", true);
+						datiXml.addElement(element);
+					}
 				}
 			} else {
 				nodes = new ArrayList<MessageElement>();
@@ -294,16 +297,16 @@ public abstract class StdModuliAuthentication extends StdModuliCore {
 		} catch (ServletException e) {
 			throw e;
 		} catch (IOException e) {
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw new ServletException(e.getMessage());
 		} catch (SOAPException e) {
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw new ServletException(e.getMessage());
 		} catch (HibernateException e) {
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw new ServletException(e.getMessage());
 		} catch (HibernateUtilException e) {
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw new ServletException(e.getMessage());
 		}
 	}
@@ -322,7 +325,7 @@ public abstract class StdModuliAuthentication extends StdModuliCore {
 
 				pwd = MD5Tools.checkSum(pwd.getBytes());
 			} catch (NoSuchAlgorithmException e) {
-				log.error(e);
+				log.error(e.getMessage(),e);
 			}
 		}
 		return pwd;
@@ -345,14 +348,14 @@ public abstract class StdModuliAuthentication extends StdModuliCore {
 
 		try {
 			nodes = new ArrayList<MessageElement>();
-			log.debug("Url Authentication: " + urlAuthentication);
+			log.debug("\n"+"Url Authentication: " + urlAuthentication);
 			userValidator = new UserValidator(urlAuthentication);
 
-			log.debug("Login: " + request.getParameter("_loginAuthentication_"));
-			log.debug("Passowd: " + request.getParameter("_passwordAuthentication_"));
+			log.debug("\n"+"Login: " + request.getParameter("_loginAuthentication_"));
+			log.debug("\n"+"Passowd: " + request.getParameter("_passwordAuthentication_"));
 			if (userValidator.validate(request.getParameter("_loginAuthentication_"),
 					request.getParameter("_passwordAuthentication_"), request.getLocalAddr(), archive, ipStazione)) {
-				log.debug("OK");
+				log.debug("\n"+"OK");
 				// TODO: welcome: 40be4e59b9a2a2b5dffb918c0e86b3d7
 				if (request.getParameter("_passwordAuthentication_").equals("welcome")
 						|| request.getParameter("_passwordAuthentication_").length() < 8) {
@@ -375,7 +378,7 @@ public abstract class StdModuliAuthentication extends StdModuliCore {
 							&& userValidator.getUtente().getLogin().getAutorizzazioni().getNome() != null)
 						cookieValue += "#" + userValidator.getUtente().getLogin().getAutorizzazioni().getNome();
 
-					log.debug("CoockieValue: " + cookieValue);
+					log.debug("\n"+"CoockieValue: " + cookieValue);
 					authentication = new Cookie(cookieName, cookieValue);
 					response.addCookie(authentication);
 					utenteXsd= userValidator.getUtente();
@@ -386,7 +389,7 @@ public abstract class StdModuliAuthentication extends StdModuliCore {
 					if (userValidator.getUtente().getMsgError() != null) {
 						nodes = new ArrayList<MessageElement>();
 						for (int x = 0; x < userValidator.getUtente().getMsgError().size(); x++) {
-							log.error("MessageError: " + userValidator.getUtente().getMsgError().get(x).getValue());
+							log.error("\n"+"MessageError: " + userValidator.getUtente().getMsgError().get(x).getValue());
 							datiXml.getConvert().addChildElement(element, nodes, "MessageError",
 									userValidator.getUtente().getMsgError().get(x).getValue(), true);
 						}
@@ -396,14 +399,14 @@ public abstract class StdModuliAuthentication extends StdModuliCore {
 
 			}
 		} catch (UserValidatorException e) {
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw new ServletException(e.getMessage());
 		} catch (ServletException e) {
 			throw e;
 		} catch (IOException e) {
 			throw e;
 		} catch (SOAPException e) {
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw new ServletException(e.getMessage());
 		}
 	}
@@ -432,7 +435,7 @@ public abstract class StdModuliAuthentication extends StdModuliCore {
 
 		try {
 			if (authentication == null) {
-				log.debug("Authentication non TROVATOOOOOOOOOOOO");
+				log.debug("\n"+"Authentication non TROVATOOOOOOOOOOOO");
 				parametri = new MessageElement();
 				parametri.setName("parametri");
 
@@ -454,15 +457,15 @@ public abstract class StdModuliAuthentication extends StdModuliCore {
 			}
 			super.endEsegui(pathXsl);
 		} catch (SOAPException e) {
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw new ServletException(e.getMessage());
 		} catch (ServletException e) {
 			throw e;
 		} catch (NoClassDefFoundError e) {
-			log.error(e);
+			log.error(e.getMessage(),e);
 			// throw new ServletException(e.getMessage(),e);
 		} catch (Exception e) {
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw new ServletException(e.getMessage(), e);
 		}
 	}
@@ -472,7 +475,7 @@ public abstract class StdModuliAuthentication extends StdModuliCore {
 	 * necessari per l'autenticazione
 	 */
 	private void initAuthentication() {
-		log.debug("initAuthentication");
+		log.debug("\n"+"initAuthentication");
 		this.fileXsl = "Authentication.xsl";
 		datiXml.setTitle("Authentication");
 		datiXml.addStyleSheet("../style/Authentication.css");
@@ -504,7 +507,7 @@ public abstract class StdModuliAuthentication extends StdModuliCore {
 
 		if (authentication != null && authentication.getValue() != null
 				&& !authentication.getValue().trim().equals("")) {
-			log.debug("authentication.getValue: " + authentication.getValue());
+			log.debug("\n"+"authentication.getValue: " + authentication.getValue());
 			st = authentication.getValue().split("#");
 			return st[0];
 		} else
@@ -521,7 +524,7 @@ public abstract class StdModuliAuthentication extends StdModuliCore {
 
 		if (authentication != null && authentication.getValue() != null
 				&& !authentication.getValue().trim().equals("")) {
-			log.debug("authentication.getValue: " + authentication.getValue());
+			log.debug("\n"+"authentication.getValue: " + authentication.getValue());
 			st = authentication.getValue().split("#");
 			return st[1];
 		} else
@@ -539,7 +542,7 @@ public abstract class StdModuliAuthentication extends StdModuliCore {
 
 		if (authentication != null && authentication.getValue() != null
 				&& !authentication.getValue().trim().equals("")) {
-			log.debug("authentication.getValue: " + authentication.getValue());
+			log.debug("\n"+"authentication.getValue: " + authentication.getValue());
 			st = authentication.getValue().split("#");
 			if (st.length > 2)
 				ris = st[2];
