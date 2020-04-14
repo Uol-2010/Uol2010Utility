@@ -16,7 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.soap.SOAPException;
 
 import org.apache.axis.message.MessageElement;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 
 import mx.randalf.hibernate.exception.HibernateUtilException;
@@ -42,7 +43,7 @@ public abstract class StdModuliAuthentication extends StdModuliCore {
 	/**
 	 * Questa variabile viene utilizzata per loggare l'applicazione
 	 */
-	private Logger log = Logger.getLogger(StdModuliAuthentication.class);
+	private Logger log = LogManager.getLogger(StdModuliAuthentication.class);
 
 	/**
 	 * Questa variabie viene utilizzata per mantenere le informazioni relative

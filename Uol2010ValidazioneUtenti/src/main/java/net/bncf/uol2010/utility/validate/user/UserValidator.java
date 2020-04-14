@@ -13,7 +13,8 @@ import java.net.URLConnection;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.PropertyException;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import net.bncf.uol2010.utility.crypting.exception.CryptingException;
 import net.bncf.uol2010.utility.validate.user.exception.UserValidatorException;
@@ -31,7 +32,7 @@ public class UserValidator {
 	/**
 	 * Questa variabile viene utilizzata per loggare l'applicazione
 	 */
-	private Logger log = Logger.getLogger(UserValidator.class);
+	private Logger log = LogManager.getLogger(UserValidator.class);
 
 	/**
 	 * Questa variabile viene uilizzata per gestire il risultato della validazione
