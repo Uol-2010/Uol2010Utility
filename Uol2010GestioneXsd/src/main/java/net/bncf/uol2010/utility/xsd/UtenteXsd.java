@@ -19,7 +19,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.PropertyException;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import mx.randalf.xsd.ReadXsd;
 import net.bncf.uol2010.utility.crypting.Crypting;
@@ -36,7 +37,7 @@ import net.bncf.uol2010.utility.xsd.authentication.Utente;
 public class UtenteXsd extends ReadXsd<Utente>
 {
 
-	private Logger log = Logger.getLogger(UtenteXsd.class);
+	private Logger log = LogManager.getLogger(UtenteXsd.class);
 
 	/**
 	 * Nome del file Xml
