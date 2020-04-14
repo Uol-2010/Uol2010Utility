@@ -18,7 +18,8 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import net.bncf.uol2010.utility.crypting.exception.CryptingException;
 
@@ -32,7 +33,7 @@ public class Crypting
 	/**
 	 * 
 	 */
-	private Logger log = Logger.getLogger(Crypting.class);
+	private Logger log = LogManager.getLogger(Crypting.class);
 
 	private String key = "01234567890abcde";
 	private String iv  = "fedcba9876543210";
