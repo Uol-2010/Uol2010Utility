@@ -42,8 +42,8 @@
   	<dependency>
   		<groupId>mx.randalf.converter.text</groupId>
   		<artifactId>RandalfConverterText</artifactId>
-  		<version>1.0.1</version>
+  		<version>1.0.2</version>
   	</dependency>
   </dependencies>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
 </project>

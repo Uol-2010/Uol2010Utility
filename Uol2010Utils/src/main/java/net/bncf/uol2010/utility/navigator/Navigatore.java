@@ -3,15 +3,11 @@
  */
 package net.bncf.uol2010.utility.navigator;
 
-import org.apache.log4j.Logger;
-
 /**
  * @author massi
  *
  */
 public abstract class Navigatore {
-
-	private Logger log = Logger.getLogger(Navigatore.class);
 	/**
 	 * Questa Variabile viene utilizzata per indicare la posizione delle immagini per il navigatore
 	 */
