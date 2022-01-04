@@ -13,7 +13,10 @@ import java.util.List;
 
 import javax.naming.NamingException;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.criterion.Order;
@@ -33,7 +36,7 @@ import net.bncf.uol2010.database.schema.servizi.entity.Utente;
  */
 public class IngressiBusiness extends BusinessLogic<Ingressi, IngressiDAO, Integer> {
 
-	private Logger log = Logger.getLogger(IngressiBusiness.class);
+	private Logger log = LogManager.getLogger(IngressiBusiness.class);
 
 	@Override
 	protected void postSave(HashTable<String, Object> dati, Ingressi table) throws NamingException,

@@ -4,17 +4,19 @@
 	<parent>
 		<groupId>net.bncf.uol2010.utility</groupId>
 		<artifactId>Uol2010Utility</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.1</version><!-- 1.0.0 -->
 	</parent>
 	<groupId>net.bncf.uol2010.utility.crypting</groupId>
 	<artifactId>Uol2010Crypting</artifactId>
+	<version>2.0.1</version><!-- 2.0.0 -->
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
-			<version>2.13.1</version>
+			<version>2.15.0</version><!-- 2.13.1 -->
 		</dependency>
 	</dependencies>
+<!-- 
 	<repositories>
 		<repository>
 			<id>bncf</id>
@@ -31,6 +33,7 @@
 			</releases>
 		</repository>
 	</repositories>
+
 	<pluginRepositories>
 		<pluginRepository>
 			<id>bncf</id>
@@ -47,6 +50,7 @@
 			</releases>
 		</pluginRepository>
 	</pluginRepositories>
+	
 	<distributionManagement>
 		<repository>
 			<id>mvn-bncf</id>
@@ -54,6 +58,7 @@
 			<url>http://maven.bncf.firenze.sbn.it/artifactory/libs-release-local</url>
 		</repository>
 	</distributionManagement>
+ -->	
 	<build>
 		<resources>
 			<resource>
@@ -70,5 +75,4 @@
 			</resource>
 		</resources>
 	</build>
-	<version>2.0.0</version>
 </project>

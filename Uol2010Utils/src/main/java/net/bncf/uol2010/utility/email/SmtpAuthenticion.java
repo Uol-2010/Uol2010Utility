@@ -6,7 +6,9 @@ package net.bncf.uol2010.utility.email;
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Questa classe viene utilizzata per gestire l'autenticzione del server Smtp
@@ -20,7 +22,7 @@ class SmtpAuthenticion extends Authenticator
 	/**
 	 * Questa variabile vinee utilizzata per loggare l'applicazione
 	 */
-	private static Logger log = Logger.getLogger(SmtpAuthenticion.class);
+	private static Logger log = LogManager.getLogger(SmtpAuthenticion.class);
 
 	/**
 	 * Questa variabile viene utilizzata per indicare il login per il server smtp

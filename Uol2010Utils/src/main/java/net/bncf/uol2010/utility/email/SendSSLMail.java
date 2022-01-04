@@ -17,7 +17,9 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Questa classe viene utilizzata per indicare la email in formato SSL
@@ -31,7 +33,7 @@ class SendSSLMail
 	/**
 	 * Questa variabile vinee utilizzata per loggare l'applicazione
 	 */
-	private static Logger log = Logger.getLogger(SendSSLMail.class);
+	private static Logger log = LogManager.getLogger(SendSSLMail.class);
 
 	/**
 	 * Questo metodo viene utilizzato per inviare il messaggio

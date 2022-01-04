@@ -15,7 +15,9 @@ import javax.mail.Multipart;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.MimeBodyPart;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Questa classe viene utilizzato per eseguire l'invio della Email
@@ -29,7 +31,7 @@ public class MailClient
 	/**
 	 * Questa variabile vinee utilizzata per loggare l'applicazione
 	 */
-	private static Logger log = Logger.getLogger(MailClient.class);
+	private static Logger log = LogManager.getLogger(MailClient.class);
 
 	/**
 	 * Questa variabile viene utilizzata per indicare il nome del server Smtp

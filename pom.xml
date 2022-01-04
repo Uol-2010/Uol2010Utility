@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.bncf.uol2010.utility</groupId>
 	<artifactId>Uol2010Utility</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version><!-- 1.0.0 -->
 	<packaging>pom</packaging>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -16,10 +16,13 @@
 		<module>Uol2010Crypting</module>
 		<module>Uol2010BusinessLogic</module>
 		<module>Uol2010Utils</module>
+<!-- 		
 		<module>Uol2010ServletXsl</module>
 		<module>Uol2010GestioneAccessoWeb</module>
 		<module>Uol2010Converter</module>
+ -->		
 	</modules>
+<!-- 
 	<repositories>
 		<repository>
 			<id>bncf</id>
@@ -59,4 +62,5 @@
 			<url>http://maven.bncf.firenze.sbn.it/artifactory/libs-release-local</url>
 		</repository>
 	</distributionManagement>
+ -->	
 </project>

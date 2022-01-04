@@ -3,7 +3,9 @@
  */
 package net.bncf.uol2010.utility.convertText.exception;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import mx.randalf.interfacException.exception.MagException;
 import mx.randalf.interfacException.interfacce.IMagException;
@@ -14,7 +16,7 @@ import mx.randalf.interfacException.interfacce.IMagException;
  */
 public class ConvertException implements IMagException {
 
-	private Logger log = Logger.getLogger(ConvertException.class);
+	private Logger log = LogManager.getLogger(ConvertException.class);
 
 	/**
 	 * 

@@ -16,7 +16,9 @@ import java.util.Vector;
 
 import javax.naming.NamingException;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.criterion.Order;
@@ -35,7 +37,7 @@ import net.bncf.uol2010.businessLogin.exception.BusinessLogicException;
 @SuppressWarnings("rawtypes")
 public abstract class BusinessLogic<T extends Serializable, D extends GenericHibernateDAO, ID extends Serializable> {
 
-	private Logger log = Logger.getLogger(BusinessLogic.class);
+	private Logger log = LogManager.getLogger(BusinessLogic.class);
 
 	private List<Order> order = null;
 
